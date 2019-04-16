@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Sehat Suraksha</string>
+
+    <!-- Front Page Options -->
+    <string name="floater_option">Floater</string>
+    <string name="topups_option">Top-Ups</string>
+    <string name="special_option">Special</string>
+
+    <!-- Special Category Parameters -->
+    <string name="age_group_text">Age Group</string>
+    <string name="family_size_text">Family Size</string>
+    <string name="sum_insured_text">Sum Insured</string>
+
+    <!-- Age Group Options -->
+    <string name="age_20">0.3 – 20 Years</string>
+    <string name="age_21_25">21 – 25 Years</string>
+    <string name="age_26_30">26 – 30 Years</string>
+    <string name="age_31_35">31 – 35 Years</string>
+    <string name="age_36_40">36 – 40 Years</string>
+    <string name="age_41_45">41 – 45 Years</string>
+    <string name="age_46_50">46 – 50 Years</string>
+    <string name="age_51_55">51 – 55 Years</string>
+    <string name="age_56_60">56 – 60 Years</string>
+    <string name="age_61_65">61 – 65 Years</string>
+    <string name="age_66_70">66 – 70 Years</string>
+    <string name="age_71_75">71 – 75 Years</string>
+    <string name="age_75">Above 75</string>
+
+    <!-- Family Size Options -->
+    <string name="size_1">Individual</string>
+    <string name="size_1_1">1 Adult + 1 Child</string>
+    <string name="size_1_2">1 Adult + 2 Children</string>
+    <string name="size_1_3">1 Adult + 3 Children</string>
+    <string name="size_1_4">1 Adult + 4 Children</string>
+    <string name="size_2">2 Adults</string>
+    <string name="size_2_1">2 Adults + 1 Child</string>
+    <string name="size_2_2">2 Adults + 2 Children</string>
+    <string name="size_2_3">2 Adults + 3 Children</string>
+    <string name="size_2_4">2 Adults + 4 Children</string>
+
+    <!-- Sum Insured Options -->
+    <string name="sum_2">2,00,000</string>
+    <string name="sum_3">3,00,000</string>
+    <string name="sum_4">4,00,000</string>
+    <string name="sum_5">5,00,000</string>
+    <string name="sum_7">7,50,000</string>
+    <string name="sum_10">10,00,000</string>
+    <string name="sum_15">15,00,000</string>
+    <string name="sum_20">20,00,000</string>
+    <string name="sum_25">25,00,000</string>
+    <string name="sum_30">30,00,000</string>
+    <string name="sum_35">35,00,000</string>
+    <string name="sum_40">40,00,000</string>
+    <string name="sum_45">45,00,000</string>
+    <string name="sum_50">50,00,000</string>
+
+    <!-- Others -->
+    <string name="button_show_plans">Show Plans</string>
+    <string name="plans_listing">Plans</string>
+</resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- These are options displayed in the age group drop-down Spinner -->
+    <string-array name="age_group_options">
+        <item>@string/age_20</item>
+        <item>@string/age_21_25</item>
+        <item>@string/age_26_30</item>
+        <item>@string/age_31_35</item>
+        <item>@string/age_36_40</item>
+        <item>@string/age_41_45</item>
+        <item>@string/age_46_50</item>
+        <item>@string/age_51_55</item>
+        <item>@string/age_56_60</item>
+        <item>@string/age_61_65</item>
+        <item>@string/age_66_70</item>
+        <item>@string/age_71_75</item>
+        <item>@string/age_75</item>
+    </string-array>
+
+    <!-- These are options displayed in the family group drop-down Spinner -->
+    <string-array name="family_size_options">
+        <item>@string/size_1</item>
+        <item>@string/size_1_1</item>
+        <item>@string/size_1_2</item>
+        <item>@string/size_1_3</item>
+        <item>@string/size_1_4</item>
+        <item>@string/size_2</item>
+        <item>@string/size_2_1</item>
+        <item>@string/size_2_2</item>
+        <item>@string/size_2_3</item>
+        <item>@string/size_2_4</item>
+    </string-array>
+
+    <!-- These are options displayed in the sum insured drop-down Spinner -->
+    <string-array name="sum_insured_options">
+        <item>@string/sum_2</item>
+        <item>@string/sum_3</item>
+        <item>@string/sum_4</item>
+        <item>@string/sum_5</item>
+        <item>@string/sum_7</item>
+        <item>@string/sum_10</item>
+        <item>@string/sum_15</item>
+        <item>@string/sum_20</item>
+        <item>@string/sum_25</item>
+        <item>@string/sum_30</item>
+        <item>@string/sum_35</item>
+        <item>@string/sum_40</item>
+        <item>@string/sum_45</item>
+        <item>@string/sum_50</item>
+    </string-array>
+
+</resources>
