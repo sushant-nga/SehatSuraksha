@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aa Gaye Meri Maut Ka Tamasha Deekhane..."
+        android:text="Work in Progress..."
         android:textAppearance="?android:textAppearanceMedium"
         android:maxLines="2"
         android:layout_centerInParent="true"/>

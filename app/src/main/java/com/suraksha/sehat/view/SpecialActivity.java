@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,11 +18,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.suraksha.sehat.R;
+import com.suraksha.sehat.utils.Url;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class SpecialActivity extends AppCompatActivity {
@@ -42,7 +46,7 @@ public class SpecialActivity extends AppCompatActivity {
     private TextView responseString;
 
     public static final String TAG = "SpecialActivity";
-    JsonObjectRequest jsonObjectRequest;
+    JsonArrayRequest jsonArrayRequest;
     RequestQueue requestQueue;
 
 
@@ -96,38 +100,37 @@ public class SpecialActivity extends AppCompatActivity {
         proceedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // launch new intent for loading plans listing screen.
-                startActivity(new Intent(SpecialActivity.this, PlansActivity.class));
+
+                // Instantiate the RequestQueue.
+                requestQueue = Volley.newRequestQueue(SpecialActivity.this);
+
+                // Request a JSON response from the provided URL.
+                jsonArrayRequest = new JsonArrayRequest
+                        (Request.Method.GET, Url.BASE_URL + Url.SUM_INSURED_LIST, null, new Response.Listener<JSONArray>() {
+
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                validateViews();
+                                Log.d("ResponseArray", response.toString());
+                                responseString.setText("Response: " + response.toString());
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                responseString.setText("Result cannot be parsed");
+
+                            }
+                        });
+
+                // Set the tag on the request.
+                jsonArrayRequest.setTag(TAG);
+
+                // Add the request to the RequestQueue.
+                requestQueue.add(jsonArrayRequest);
+
             }
         });
-
-        // Instantiate the RequestQueue.
-        requestQueue = Volley.newRequestQueue(this);
-        String url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2014-01-01&endtime=2014-01-02&minmagnitude=5";
-
-        // Request a JSON response from the provided URL.
-        jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        validateViews();
-                        responseString.setText("Response: " + response.toString());
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        responseString.setText("Result cannot be parsed");
-
-                    }
-                });
-
-        // Set the tag on the request.
-        jsonObjectRequest.setTag(TAG);
-
-        // Add the request to the RequestQueue.
-        requestQueue.add(jsonObjectRequest);
 
         setupSpinner();
     }
