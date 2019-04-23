@@ -9,4 +9,11 @@
     android:background="@drawable/app_background_min"
     tools:context=".view.SpecialActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        tools:text="Aa Gaye Meri Maut Ka Tamasha Dekhne" />
+
 </RelativeLayout>
