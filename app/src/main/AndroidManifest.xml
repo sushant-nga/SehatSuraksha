@@ -40,7 +40,8 @@
         <activity
             android:name=".view.SpecialActivity"
             android:label="@string/special_option"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.suraksha.sehat.view.MainActivity" />

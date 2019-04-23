@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- These are options displayed in the family group drop-down Spinner -->
+    <string-array name="age_unit_options">
+        <item>@string/age_years</item>
+        <item>@string/age_days</item>
+    </string-array>
+
     <!-- These are options displayed in the age group drop-down Spinner -->
     <string-array name="age_group_options">
         <item>@string/age_20</item>
@@ -38,7 +44,9 @@
         <item>@string/sum_3</item>
         <item>@string/sum_4</item>
         <item>@string/sum_5</item>
+        <item>@string/sum_6</item>
         <item>@string/sum_7</item>
+        <item>@string/sum_7_5</item>
         <item>@string/sum_10</item>
         <item>@string/sum_15</item>
         <item>@string/sum_20</item>

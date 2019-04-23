@@ -7,9 +7,13 @@
     <string name="special_option">Special</string>
 
     <!-- Special Category Parameters -->
-    <string name="age_group_text">Age Group</string>
+    <string name="age_group_text">Age</string>
     <string name="family_size_text">Family Size</string>
     <string name="sum_insured_text">Sum Insured</string>
+
+    <!-- Age Unit Options -->
+    <string name="age_days">Days</string>
+    <string name="age_years">Years</string>
 
     <!-- Age Group Options -->
     <string name="age_20">0.3 – 20 Years</string>
@@ -43,7 +47,9 @@
     <string name="sum_3">3,00,000</string>
     <string name="sum_4">4,00,000</string>
     <string name="sum_5">5,00,000</string>
-    <string name="sum_7">7,50,000</string>
+    <string name="sum_6">6,00,000</string>
+    <string name="sum_7">7,00,000</string>
+    <string name="sum_7_5">7,50,000</string>
     <string name="sum_10">10,00,000</string>
     <string name="sum_15">15,00,000</string>
     <string name="sum_20">20,00,000</string>
