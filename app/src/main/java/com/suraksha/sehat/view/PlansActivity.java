@@ -40,6 +40,9 @@ public class PlansActivity extends AppCompatActivity {
         sizeId = getIntent().getStringExtra("mSizeId");
         sumId = getIntent().getStringExtra("mSumId");
         age = getIntent().getStringExtra("age");
+        Log.d("PlansActivity(mSizeId)", sizeId);
+        Log.d("PlansActivity(mSumId)", sumId);
+        Log.d("PlansActivity(age)", age);
 
         //POST API call
         // Instantiate the RequestQueue for SumInsured Params.
@@ -65,16 +68,19 @@ public class PlansActivity extends AppCompatActivity {
                     }
                 }) {
             @Override
-            public String getBodyContentType() {
-                return "application/x-www-form-urlencoded; charset=UTF-8";
-            }
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
                 params.put("family_size_id", sizeId);
                 params.put("sum_insured_id", sumId);
                 params.put("age", age);
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type","application/x-www-form-urlencoded");
                 return params;
             }
         };
