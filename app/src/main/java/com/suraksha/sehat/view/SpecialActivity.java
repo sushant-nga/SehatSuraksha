@@ -142,40 +142,19 @@ public class SpecialActivity extends AppCompatActivity {
             //validateViews(false);
         }
 
-//        proceedButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                // Instantiate the RequestQueue.
-//                requestQueue = Volley.newRequestQueue(SpecialActivity.this);
-//
-//                // Request a JSON response from the provided URL.
-//                jsonArrayRequest = new JsonArrayRequest
-//                        (Request.Method.GET, Url.BASE_URL + Url.SUM_INSURED_LIST, null, new Response.Listener<JSONArray>() {
-//
-//                            @Override
-//                            public void onResponse(JSONArray response) {
-//                                validateViews();
-//                                Log.d("ResponseArray", response.toString());
-//                                responseString.setText("Response: " + response.toString());
-//                            }
-//                        }, new Response.ErrorListener() {
-//
-//                            @Override
-//                            public void onErrorResponse(VolleyError error) {
-//                                responseString.setText("Result cannot be parsed");
-//
-//                            }
-//                        });
-//
-//                // Set the tag on the request.
-//                jsonArrayRequest.setTag(TAG);
-//
-//                // Add the request to the RequestQueue.
-//                requestQueue.add(jsonArrayRequest);
-//
-//            }
-//        });
+        proceedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            Intent intent= new Intent(SpecialActivity.this,PlansActivity.class);
+            intent.putExtra("mSizeId", mSizeId);
+            intent.putExtra("mSumId",mSumId);
+            intent.putExtra("age", mAgeGroup.getText());
+            startActivity(intent);
+
+
+                            }
+                        });
+
 
     }
 

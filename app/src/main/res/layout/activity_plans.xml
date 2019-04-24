@@ -10,6 +10,7 @@
     tools:context=".view.SpecialActivity">
 
     <TextView
+        android:id="@+id/response_string"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
