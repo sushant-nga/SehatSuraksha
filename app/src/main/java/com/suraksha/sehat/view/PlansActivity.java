@@ -29,15 +29,17 @@ public class PlansActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     TextView responseString;
 
+    public static final String TAG = "SpecialActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plans);
 
         responseString = (TextView) findViewById(R.id.response_string);
-        sizeId= getIntent().getStringExtra("mSizeId");
-        sumId=getIntent().getStringExtra("mSumId");
-        age=getIntent().getStringExtra("age");
+        sizeId = getIntent().getStringExtra("mSizeId");
+        sumId = getIntent().getStringExtra("mSumId");
+        age = getIntent().getStringExtra("age");
 
         //POST API call
         // Instantiate the RequestQueue for SumInsured Params.
@@ -61,22 +63,24 @@ public class PlansActivity extends AppCompatActivity {
                         responseString.setText("Result cannot be parsed");
 
                     }
-                    @Override
-                    public String getBodyContentType() {
-                        return "application/x-www-form-urlencoded; charset=UTF-8";
-                    }
-                    @Override
-                    public byte[] getBody() throws AuthFailureError {
-                        HashMap<String, String> params2 = new HashMap<String, String>();
-                        params2.put("family_size_id", sizeId);
-                        params2.put("sum_insured_id", sumId);
-                        params2.put("age", age);
-                        return new JSONObject(params2).toString().getBytes();
-                    }
-                });
+                }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("family_size_id", sizeId);
+                params.put("sum_insured_id", sumId);
+                params.put("age", age);
+                return params;
+            }
+        };
 
         // Set the tag on the request.
-        jsonArrayRequest.setTag("gdfss");
+        jsonArrayRequest.setTag(TAG);
 
         // Instantiate the RequestQueue for FamilySize Params.
         requestQueue = Volley.newRequestQueue(PlansActivity.this);

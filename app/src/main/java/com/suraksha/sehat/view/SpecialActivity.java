@@ -145,16 +145,13 @@ public class SpecialActivity extends AppCompatActivity {
         proceedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            Intent intent= new Intent(SpecialActivity.this,PlansActivity.class);
-            intent.putExtra("mSizeId", mSizeId);
-            intent.putExtra("mSumId",mSumId);
-            intent.putExtra("age", mAgeGroup.getText());
-            startActivity(intent);
-
-
-                            }
-                        });
-
+                Intent intent= new Intent(SpecialActivity.this,PlansActivity.class);
+                intent.putExtra("mSizeId", mSizeId);
+                intent.putExtra("mSumId",mSumId);
+                intent.putExtra("age", mAgeGroup.getText());
+                startActivity(intent);
+            }
+        });
 
     }
 
