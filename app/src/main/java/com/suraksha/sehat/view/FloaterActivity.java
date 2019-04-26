@@ -66,6 +66,8 @@ public class FloaterActivity extends AppCompatActivity {
     private int familyAdultSize [] = new int [10];
     private int familyChildSize [] = new int [10];
 
+    String ageText;
+
     /**
      * Age Unit. The possible valid values are in the InsuranceContract.java file.
      */
@@ -93,7 +95,7 @@ public class FloaterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_floater);
+        setContentView(R.layout.activity_special);
 
         getInputParameters();
 
@@ -127,6 +129,8 @@ public class FloaterActivity extends AppCompatActivity {
                 if(s.length() > 2) {
                     mAgeGroup.setText("");
                     Toast.makeText(FloaterActivity.this, "Age cannot be more than 100", Toast.LENGTH_SHORT).show();
+                } else {
+                    ageText = s.toString();
                 }
             }
         });
@@ -148,7 +152,8 @@ public class FloaterActivity extends AppCompatActivity {
                 Intent intent= new Intent(FloaterActivity.this,PlansActivity.class);
                 intent.putExtra("mSizeId", mSizeId);
                 intent.putExtra("mSumId",mSumId);
-                intent.putExtra("age", mAgeGroup.getText());
+                intent.putExtra("age", ageText);
+                Log.d("SpecialActivity(age)", ageText);
                 startActivity(intent);
             }
         });

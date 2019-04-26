@@ -3,7 +3,7 @@ package com.suraksha.sehat.utils;
 public class Url {
 
     // local server - Deeksha's System (WiFi - Algorithm)
-    public static String BASE_URL = "http://10.0.0.246:3003/";
+    public static String BASE_URL = "http://10.0.0.246:3004/";
 
     // List of APIs
 
