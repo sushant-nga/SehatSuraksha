@@ -67,4 +67,7 @@
     <!-- Error message when there is no internet connectivity [CHAR LIMIT=NONE] -->
     <string name="no_internet_connection">No internet connection.</string>
 
+    <!-- Text to display in the list when there are no plans [CHAR LIMIT=NONE] -->
+    <string name="no_plans">No plans found.</string>
+
 </resources>

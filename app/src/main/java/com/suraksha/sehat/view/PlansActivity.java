@@ -1,6 +1,7 @@
 package com.suraksha.sehat.view;
 
 import android.app.LoaderManager;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Loader;
 import android.content.SharedPreferences;
@@ -24,7 +25,9 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.suraksha.sehat.R;
+import com.suraksha.sehat.adapter.PlansAdapter;
 import com.suraksha.sehat.model.Plans;
+import com.suraksha.sehat.network.PlansLoader;
 import com.suraksha.sehat.presenter.JsonParser;
 import com.suraksha.sehat.utils.Url;
 
@@ -38,7 +41,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PlansActivity extends AppCompatActivity {
+public class PlansActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<List<Plans>> {
     String sizeId,sumId,age;
     JsonArrayRequest jsonArrayRequest;
     RequestQueue requestQueue;
@@ -54,7 +58,7 @@ public class PlansActivity extends AppCompatActivity {
      * Constant value for the earthquake loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
      */
-    private static final int EARTHQUAKE_LOADER_ID = 1;
+    private static final int PLANS_LOADER_ID = 1;
 
     public static final String TAG = "SpecialActivity";
 
@@ -100,7 +104,7 @@ public class PlansActivity extends AppCompatActivity {
             // Initialize the loader. Pass in the int ID constant defined above and pass in null fort
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
-            loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+            loaderManager.initLoader(PLANS_LOADER_ID, null, this);
         } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
@@ -116,31 +120,31 @@ public class PlansActivity extends AppCompatActivity {
     @Override
     public Loader<List<Plans>> onCreateLoader(int i, Bundle bundle) {
 
-        return new makeHttpRequest();
+        return new PlansLoader(this, sizeId, sumId, age);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> earthquakes) {
+    public void onLoadFinished(Loader<List<Plans>> loader, List<Plans> plans) {
         // Hide loading indicator because the data has been loaded
         View loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
 
-        // Set empty state text to display "No earthquakes found."
-        mEmptyStateTextView.setText(R.string.no_earthquakes);
+        // Set empty state text to display "No plans found."
+        mEmptyStateTextView.setText(R.string.no_plans);
 
-        // Clear the adapter of previous earthquake data
+        // Clear the adapter of previous plans data
         //mAdapter.clear();
 
-        // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
+        // If there is a valid list of {@link Plans}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
-        if (earthquakes != null && !earthquakes.isEmpty()) {
-            mAdapter.addAll(earthquakes);
+        if (plans != null && !plans.isEmpty()) {
+            mAdapter.addAll(plans);
             //updateUi(earthquakes);
         }
     }
 
     @Override
-    public void onLoaderReset(Loader<List<Earthquake>> loader) {
+    public void onLoaderReset(Loader<List<Plans>> loader) {
         // Loader reset, so we can clear out our existing data.
         mAdapter.clear();
     }
@@ -148,7 +152,7 @@ public class PlansActivity extends AppCompatActivity {
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
-    private List<Plans> makeHttpRequest() {
+    public List<Plans> makeHttpRequest() {
 
         //POST API call
         // Instantiate the RequestQueue for SumInsured Params.
