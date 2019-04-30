@@ -10,6 +10,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.suraksha.sehat.model.Plans;
 import com.suraksha.sehat.presenter.JsonParser;
@@ -61,7 +62,8 @@ public final class QueryUtils {
     public static List<Plans> fetchPlansData(Context context, String sizeId, String sumId,
                                              String age, String requestUrl) {
 
-        JsonArrayRequest jsonArrayRequest;
+        //JsonArrayRequest jsonArrayRequest;
+        StringRequest stringRequest;
         RequestQueue requestQueue;
         mSizeId = sizeId;
         mSumId = sumId;
@@ -70,29 +72,20 @@ public final class QueryUtils {
         Log.d("SumId", mSumId);
         Log.d("Age", mAge);
 
-        JSONObject parameters = new JSONObject();
-        try {
-            parameters.put("family_size_id", mSizeId);
-            parameters.put("sum_insured_id", mSumId);
-            parameters.put("age", mAge);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        JSONArray arrayParams = new JSONArray(parameters);
 
         //POST API call
 
         // Request a JSON response from the provided URL.
-        jsonArrayRequest = new JsonArrayRequest
-                (Request.Method.POST, requestUrl, null, new Response.Listener<JSONArray>() {
+        stringRequest = new StringRequest
+                (Request.Method.POST, requestUrl,  new Response.Listener<String>() {
 
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(String response) {
                         Log.d("ResponseArray", response.toString());
 
                         // Parse the response, and extract a list of plans.
-                        plans = JsonParser.extractFeatureFromJson(response.toString());
+                        plans = JsonParser.extractFeatureFromJson(response);
 
                     }
                 }, new Response.ErrorListener() {
@@ -121,7 +114,7 @@ public final class QueryUtils {
         };
 
         // Set the tag on the request.
-        jsonArrayRequest.setTag(LOG_TAG);
+        stringRequest.setTag(LOG_TAG);
 
         // Instantiate the RequestQueue for FamilySize Params.
         requestQueue = Volley.newRequestQueue(context);
@@ -129,7 +122,7 @@ public final class QueryUtils {
 
 
         // Add the request to the RequestQueue.
-        requestQueue.add(jsonArrayRequest);
+        requestQueue.add(stringRequest);
 
         return plans;
 
