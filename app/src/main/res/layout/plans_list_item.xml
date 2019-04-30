@@ -31,33 +31,188 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:layout_margin="5dp"
             tools:text="@string/floater_option"
             android:textColor="@android:color/black"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textAlignment="center"
             android:gravity="center"
             android:layout_gravity="center" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/rounded_border"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="3.3"
+                android:layout_weight="33.3"
                 android:orientation="vertical">
 
                 <TextView
-                    >
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="Sum Insured"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:gravity="bottom"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/colorPrimaryDisabled"
+                    android:textAllCaps="true"
+                    android:layout_weight="3" />
+
+                <TextView
+                    android:id="@+id/sum_insured"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="7"
+                    tools:text="5,00,000 /-"
+                    android:layout_gravity="top|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/colorPrimaryDisabled"
+                    android:textAllCaps="true"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="33.3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="Family Size"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:gravity="bottom"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/colorPrimaryDisabled"
+                    android:textAllCaps="true"
+                    android:layout_weight="3" />
+
+                <TextView
+                    android:id="@+id/adult_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="3.5"
+                    tools:text="1 Adult"
+                    android:layout_gravity="top|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/colorPrimaryDisabled" />
+
+                <TextView
+                    android:id="@+id/child_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="3.5"
+                    tools:text="2 Child"
+                    android:layout_gravity="top|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/colorPrimaryDisabled" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="33.3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:text="Age Group"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:gravity="bottom"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/colorPrimaryDisabled"
+                    android:textAllCaps="true"
+                    android:layout_weight="3" />
+
+                <TextView
+                    android:id="@+id/age_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="7"
+                    tools:text="17 Years"
+                    android:maxLines="2"
+                    android:layout_gravity="top|center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/colorPrimaryDisabled" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/premium_amount_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Premium :"
+            android:textColor="@android:color/black"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/premium_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2750 /-"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:background="@drawable/rounded_border"
+                android:layout_margin="5dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="inclusive of tax"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:layout_margin="5dp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:layout_gravity="center" />
 
         </LinearLayout>
     </LinearLayout>

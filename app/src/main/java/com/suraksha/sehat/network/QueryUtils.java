@@ -24,9 +24,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,10 +66,22 @@ public final class QueryUtils {
         mSizeId = sizeId;
         mSumId = sumId;
         mAge = age;
+        Log.d("SizeId", mSizeId);
+        Log.d("SumId", mSumId);
+        Log.d("Age", mAge);
+
+        JSONObject parameters = new JSONObject();
+        try {
+            parameters.put("family_size_id", mSizeId);
+            parameters.put("sum_insured_id", mSumId);
+            parameters.put("age", mAge);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JSONArray arrayParams = new JSONArray(parameters);
 
         //POST API call
-        // Instantiate the RequestQueue for SumInsured Params.
-        requestQueue = Volley.newRequestQueue(context);
 
         // Request a JSON response from the provided URL.
         jsonArrayRequest = new JsonArrayRequest
@@ -85,12 +99,12 @@ public final class QueryUtils {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.d("API Call", "failed");
                     }
                 }) {
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
+            // adding parameters to the request
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
                 params.put("family_size_id", mSizeId);
                 params.put("sum_insured_id", mSumId);
                 params.put("age", mAge);
@@ -100,9 +114,9 @@ public final class QueryUtils {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("Content-Type","application/x-www-form-urlencoded");
-                return params;
+                Map<String,String> header = new HashMap<String, String>();
+                header.put("Content-Type", "application/x-www-form-urlencoded");
+                return header;
             }
         };
 

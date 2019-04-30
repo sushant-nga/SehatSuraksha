@@ -46,7 +46,6 @@ public class PlansActivity extends AppCompatActivity
     String sizeId,sumId,age;
     JsonArrayRequest jsonArrayRequest;
     RequestQueue requestQueue;
-    TextView responseString;
 
     /** Adapter for the list of plans */
     private PlansAdapter mAdapter;
@@ -149,66 +148,63 @@ public class PlansActivity extends AppCompatActivity
         mAdapter.clear();
     }
 
-    /**
-     * Make an HTTP request to the given URL and return a String as the response.
-     */
-    public List<Plans> makeHttpRequest() {
-
-        //POST API call
-        // Instantiate the RequestQueue for SumInsured Params.
-        requestQueue = Volley.newRequestQueue(PlansActivity.this);
-
-        // Request a JSON response from the provided URL.
-        jsonArrayRequest = new JsonArrayRequest
-                (Request.Method.POST, Url.BASE_URL + Url.PLANS_LIST, null, new Response.Listener<JSONArray>() {
-
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        Log.d("ResponseArray", response.toString());
-
-                        // Parse the response, and extract a list of plans.
-                        plans = JsonParser.extractFeatureFromJson(response.toString());
-
-                        responseString.setText("Response: " + response.toString());
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        responseString.setText("Result cannot be parsed");
-
-                    }
-                }) {
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("family_size_id", sizeId);
-                params.put("sum_insured_id", sumId);
-                params.put("age", age);
-
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("Content-Type","application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-
-        // Set the tag on the request.
-        jsonArrayRequest.setTag(TAG);
-
-        // Instantiate the RequestQueue for FamilySize Params.
-        requestQueue = Volley.newRequestQueue(PlansActivity.this);
-
-
-
-        // Add the request to the RequestQueue.
-        requestQueue.add(jsonArrayRequest);
-
-        return plans;
-
-    }
+//    /**
+//     * Make an HTTP request to the given URL and return a String as the response.
+//     */
+//    public List<Plans> makeHttpRequest() {
+//
+//        //POST API call
+//        // Instantiate the RequestQueue for SumInsured Params.
+//        requestQueue = Volley.newRequestQueue(PlansActivity.this);
+//
+//        // Request a JSON response from the provided URL.
+//        jsonArrayRequest = new JsonArrayRequest
+//                (Request.Method.POST, Url.BASE_URL + Url.PLANS_LIST, null, new Response.Listener<JSONArray>() {
+//
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                        Log.d("ResponseArray", response.toString());
+//
+//                        // Parse the response, and extract a list of plans.
+//                        plans = JsonParser.extractFeatureFromJson(response.toString());
+//                    }
+//                }, new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//
+//                    }
+//                }) {
+//            @Override
+//            protected Map<String,String> getParams(){
+//                Map<String,String> params = new HashMap<String, String>();
+//                params.put("family_size_id", sizeId);
+//                params.put("sum_insured_id", sumId);
+//                params.put("age", age);
+//
+//                return params;
+//            }
+//
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String,String> params = new HashMap<String, String>();
+//                params.put("Content-Type","application/x-www-form-urlencoded");
+//                return params;
+//            }
+//        };
+//
+//        // Set the tag on the request.
+//        jsonArrayRequest.setTag(TAG);
+//
+//        // Instantiate the RequestQueue for FamilySize Params.
+//        requestQueue = Volley.newRequestQueue(PlansActivity.this);
+//
+//
+//
+//        // Add the request to the RequestQueue.
+//        requestQueue.add(jsonArrayRequest);
+//
+//        return plans;
+//
+//    }
 }

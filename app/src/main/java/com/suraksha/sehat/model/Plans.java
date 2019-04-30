@@ -97,4 +97,32 @@ public class Plans {
     public String getCompanyName() {
         return mCompanyName;
     }
+
+    /**
+     * Returns the adult count of the plan.
+     */
+    public int getAdultCount() {
+        return mAdult;
+    }
+
+    /**
+     * Returns the child count of the plan.
+     */
+    public int getChildCount() {
+        return mChild;
+    }
+
+    /**
+     * Returns the lower age group of the plan.
+     */
+    public double getLowerAgeGroup() {
+        return mLowerAgeGroup;
+    }
+
+    /**
+     * Returns the upper age group of the plan.
+     */
+    public int getUpperAgeGroup() {
+        return mUpperAgeGroup;
+    }
 }
