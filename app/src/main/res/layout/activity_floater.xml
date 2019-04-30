@@ -180,10 +180,4 @@
         android:layout_margin="10dp"
         android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/response"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp" />
-
 </LinearLayout>

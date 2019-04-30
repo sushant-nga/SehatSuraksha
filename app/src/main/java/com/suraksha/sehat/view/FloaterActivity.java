@@ -12,19 +12,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.suraksha.sehat.R;
 import com.suraksha.sehat.utils.Url;
@@ -97,8 +95,6 @@ public class FloaterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_special);
 
-        getInputParameters();
-
         mAgeGroup = (EditText) findViewById(R.id.age);
         mAgeUnit = (Spinner) findViewById(R.id.spinner_age_unit);
         mFamilySize = (Spinner) findViewById(R.id.spinner_family_size);
@@ -108,9 +104,8 @@ public class FloaterActivity extends AppCompatActivity {
 
         progressIndicator = (ProgressBar) findViewById(R.id.loading_indicator);
 
-        responseString = (TextView) findViewById(R.id.response);
-
         validateViews(false);
+        getInputParameters();
         ageUnitValidator();
 
         mAgeGroup.addTextChangedListener(new TextWatcher() {
@@ -171,16 +166,14 @@ public class FloaterActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("ResponseArray", response.toString());
+                        Log.d("ResponseArray[Sum]", response.toString());
                         REQUEST_FLAG += 1;
                         parseJsonResult(response, 1);
-                        responseString.setText("Response: " + response.toString());
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        responseString.setText("Result cannot be parsed");
 
                     }
                 });
@@ -197,25 +190,31 @@ public class FloaterActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("ResponseArray", response.toString());
+                        Log.d("ResponseArray[Family]", response.toString());
                         REQUEST_FLAG += 1;
-                        if (REQUEST_FLAG == 2) {
                             //validateViews(true);
                             parseJsonResult(response, 2);
-                        }
-                        responseString.setText("Response: " + response.toString());
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        responseString.setText("Result cannot be parsed");
 
                     }
                 });
 
         // Set the tag on the request.
         jsonArrayRequest2.setTag(TAG);
+
+        jsonArrayRequest1.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                3,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        jsonArrayRequest2.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                3,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         // Add the request to the RequestQueue.
         requestQueue.add(jsonArrayRequest1);
@@ -240,6 +239,9 @@ public class FloaterActivity extends AppCompatActivity {
                     familySizeId[i] = json.getString("_id");
                     familyAdultSize[i] = json.getInt("adult");
                     familyChildSize[i] = json.getInt("child");
+                }
+                if (REQUEST_FLAG > 1) {
+                    validateViews(true);
                     setupSpinner();
                 }
             } catch (JSONException e) {
@@ -478,12 +480,12 @@ public class FloaterActivity extends AppCompatActivity {
     public void ageUnitValidator() {
         if (mUnit == 1) {
             mAgeGroup.setText("91");
-            mAgeGroup.setClickable(false);
-            mAgeGroup.setFocusable(false);
-        } else if (mUnit == 2) {
+            mAgeGroup.setEnabled(false);
             mAgeGroup.setFocusable(true);
-            mAgeGroup.setClickable(true);
-            mAgeGroup.setText("");
+        } else if (mUnit == 2) {
+            mAgeGroup.setEnabled(true);
+            mAgeGroup.setFocusable(true);
+            mAgeGroup.getText().clear();
         }
     }
 
@@ -500,12 +502,11 @@ public class FloaterActivity extends AppCompatActivity {
         // Validating views so that User can interact with them
 //        mAgeGroup.setClickable(flag);
 //        mAgeGroup.setFocusable(flag);
-        mFamilySize.setClickable(flag);
-        mFamilySize.setFocusable(flag);
-        mSumInsured.setClickable(flag);
-        mSumInsured.setFocusable(flag);
-        proceedButton.setClickable(flag);
-        proceedButton.setFocusable(flag);
+        mFamilySize.setEnabled(flag);
+        mFamilySize.setSelection(0);
+        mSumInsured.setEnabled(flag);
+        mSumInsured.setSelection(0);
+        proceedButton.setEnabled(flag);
         if (flag == true) {
             proceedButton.setBackgroundResource(R.color.colorPrimary);
             progressIndicator.setVisibility(View.GONE);

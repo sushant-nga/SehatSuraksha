@@ -9,6 +9,7 @@
     <!-- Special Category Parameters -->
     <string name="age_group_text">Age</string>
     <string name="family_size_text">Family Size</string>
+    <string name="category_text">Category</string>
     <string name="sum_insured_text">Sum Insured</string>
 
     <!-- Age Unit Options -->

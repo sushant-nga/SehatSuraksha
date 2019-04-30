@@ -9,6 +9,50 @@
     android:background="@drawable/app_background_min"
     tools:context=".view.SpecialActivity">
 
+    <!-- Category Selector -->
+    <LinearLayout
+        android:id="@+id/category_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <!-- Label - Category -->
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:text="@string/category_text" />
+
+        <!-- Input field -->
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="2.5"
+            android:layout_gravity="center"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <!-- Category drop-down spinner -->
+            <Spinner
+                android:id="@+id/spinner_category"
+                android:layout_height="48dp"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="match_parent"
+                android:spinnerMode="dropdown"/>
+        </LinearLayout>
+    </LinearLayout>
+
     <!-- Age Group -->
     <LinearLayout
         android:id="@+id/age_group"
@@ -179,11 +223,5 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/response"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp" />
 
 </LinearLayout>

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/app_background_min"
-    tools:context=".view.SpecialActivity">
+    tools:context=".view.PlansActivity">
 
     <ListView
         android:id="@+id/list"

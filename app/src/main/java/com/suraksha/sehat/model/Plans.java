@@ -47,12 +47,22 @@ public class Plans {
     /**
      * Constructs a new {@link Plans} object.
      */
-    public Plans(String planId, int premiumAmount, String planName, String familySize, int sumInsured, String companyName) {
+    public Plans(String planId, String familySizeId, String sumInsuredId, String companyId, String planName,
+                 double lowerAgeGroup, int upperAgeGroup, int premiumAmount, int categoryId, String familySize,
+                 int adult, int child, int amount, String companyName) {
         mPlanId = planId;
-        mPremiumAmount = premiumAmount;
+        mFamilySizeId = familySizeId;
+        mSumInsuredId = sumInsuredId;
+        mCompanyId = companyId;
         mPlanName = planName;
+        mLowerAgeGroup = lowerAgeGroup;
+        mUpperAgeGroup = upperAgeGroup;
+        mPremiumAmount = premiumAmount;
+        mCategoryId = categoryId;
         mFamilySize = familySize;
-        mSumInsured = sumInsured;
+        mAdult = adult;
+        mChild = child;
+        mSumInsured = amount;
         mCompanyName = companyName;
     }
 

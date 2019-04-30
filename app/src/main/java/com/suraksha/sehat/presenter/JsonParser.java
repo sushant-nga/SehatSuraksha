@@ -68,10 +68,10 @@ public class JsonParser {
                 String planName = currentPlan.getString("plan_name");
 
                 // Extract the lowerAgeGroup for the key called "lower_age_group"
-                String lowerAgeGroup = currentPlan.getString("lower_age_group");
+                double lowerAgeGroup = currentPlan.getDouble("lower_age_group");
 
                 // Extract the upperAgeGroup for the key called "upper_age_group"
-                String upperAgeGroup = currentPlan.getString("upper_age_group");
+                int upperAgeGroup = currentPlan.getInt("upper_age_group");
 
                 // Extract the premiumAmount for the key called "premium_amount"
                 int premiumAmount = currentPlan.getInt("premium_amount");
@@ -114,6 +114,15 @@ public class JsonParser {
 
                 // Extract the companyName for the key called "company_name"
                 String companyName = companyObject.getString("company_name");
+
+                // Create a new {@link Plan} object with the parameters
+                // and url from the JSON response.
+                Plans plan = new Plans(planId, familySizeId, sumInsuredId, companyId, planName,
+                        lowerAgeGroup, upperAgeGroup, premiumAmount, categoryId, familySize,
+                        adult, child, amount, companyName);
+
+                // Add the new {@link Plan} to the list of plans.
+                plans.add(plan);
 
             }
 

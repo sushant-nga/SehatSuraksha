@@ -26,6 +26,8 @@ public class PlansAdapter extends ArrayAdapter<Plans> {
      */
     private static final int GST_TAX_RATE = 18;
 
+    Context mContext;
+
     /**
      * Constructs a new {@link PlansAdapter}.
      *
@@ -34,6 +36,7 @@ public class PlansAdapter extends ArrayAdapter<Plans> {
      */
     public PlansAdapter(Context context, List<Plans> plans) {
         super(context, 0, plans);
+        mContext = context;
     }
 
     /**
@@ -46,7 +49,7 @@ public class PlansAdapter extends ArrayAdapter<Plans> {
         // otherwise, if convertView is null, then inflate a new list item layout.
         View listItemView = convertView;
         if (listItemView == null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(
+            listItemView = LayoutInflater.from(mContext).inflate(
                     R.layout.plans_list_item, parent, false);
         }
 
@@ -67,6 +70,10 @@ public class PlansAdapter extends ArrayAdapter<Plans> {
         adultCount.setText(String.valueOf(currentPlan.getAdultCount()) + " Adult");
         childCount.setText(String.valueOf(currentPlan.getChildCount()) + " Child");
         ageGroup.setText(String.valueOf(currentPlan.getLowerAgeGroup()) + " - " + String.valueOf(currentPlan.getUpperAgeGroup()) + " Years");
+
+        int mPremiumAmount = currentPlan.getPremiumAmount() + ((GST_TAX_RATE * currentPlan.getPremiumAmount())/100);
+
+        premiumAmount.setText(String.valueOf(mPremiumAmount) + " /-");
 
         // Return the list item view that is now showing the appropriate data
         return listItemView;
