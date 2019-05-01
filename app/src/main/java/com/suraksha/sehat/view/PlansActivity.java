@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PlansActivity extends AppCompatActivity {
-    String sizeId,sumId,age;
+    String sizeId, sumId, age, categoryId, fromActivity;
 
     View loadingIndicator;
 
@@ -71,9 +71,12 @@ public class PlansActivity extends AppCompatActivity {
         sizeId = getIntent().getStringExtra("mSizeId");
         sumId = getIntent().getStringExtra("mSumId");
         age = getIntent().getStringExtra("age");
+        categoryId = getIntent().getStringExtra("categoryId");
+        fromActivity = getIntent().getStringExtra("fromActivity");
         Log.d("PlansActivity(mSizeId)", sizeId);
         Log.d("PlansActivity(mSumId)", sumId);
         Log.d("PlansActivity(age)", age);
+        Log.d("PlansActivity(category)", categoryId);
 
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -127,6 +130,7 @@ public class PlansActivity extends AppCompatActivity {
                     params.put("family_size_id", sizeId);
                     params.put("sum_insured_id", sumId);
                     params.put("age", age);
+                    params.put("category_id", categoryId);
 
                     return params;
                 }

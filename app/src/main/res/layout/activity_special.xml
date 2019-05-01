@@ -110,50 +110,6 @@
 
     </LinearLayout>
 
-    <!-- Family Size -->
-    <LinearLayout
-        android:id="@+id/family_size"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
-
-        <!-- Label - Family Size -->
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="1.5"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:fontFamily="sans-serif"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:text="@string/family_size_text" />
-
-        <!-- Input field -->
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
-            android:layout_weight="2.5"
-            android:layout_gravity="center"
-            android:gravity="end"
-            android:orientation="vertical">
-
-            <!-- Age Group drop-down spinner -->
-            <Spinner
-                android:id="@+id/spinner_family_size"
-                android:layout_height="48dp"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
-                android:layout_width="match_parent"
-                android:spinnerMode="dropdown"/>
-        </LinearLayout>
-    </LinearLayout>
-
     <!-- Sum Insured -->
     <LinearLayout
         android:id="@+id/sum_insured"

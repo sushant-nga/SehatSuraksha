@@ -49,10 +49,8 @@ public class FloaterActivity extends AppCompatActivity {
 
     private ProgressBar progressIndicator;
 
-    private TextView responseString;
-
     public static final String TAG = "FloaterActivity";
-    JsonArrayRequest jsonArrayRequest1, jsonArrayRequest2;
+    JsonArrayRequest jsonArrayRequest1, jsonArrayRequest2, jsonArrayRequest3;
     RequestQueue requestQueue;
 
     int REQUEST_FLAG = 0;
@@ -63,6 +61,9 @@ public class FloaterActivity extends AppCompatActivity {
     private String familySizeId [] = new String [10];
     private int familyAdultSize [] = new int [10];
     private int familyChildSize [] = new int [10];
+
+    private String categoryId;
+    private String categoryName;
 
     String ageText;
 
@@ -93,7 +94,7 @@ public class FloaterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_special);
+        setContentView(R.layout.activity_floater);
 
         mAgeGroup = (EditText) findViewById(R.id.age);
         mAgeUnit = (Spinner) findViewById(R.id.spinner_age_unit);
@@ -148,6 +149,8 @@ public class FloaterActivity extends AppCompatActivity {
                 intent.putExtra("mSizeId", mSizeId);
                 intent.putExtra("mSumId",mSumId);
                 intent.putExtra("age", ageText);
+                intent.putExtra("categoryId", categoryId);
+                intent.putExtra("fromActivity", "Floater");
                 Log.d("SpecialActivity(age)", ageText);
                 startActivity(intent);
             }
@@ -206,6 +209,31 @@ public class FloaterActivity extends AppCompatActivity {
         // Set the tag on the request.
         jsonArrayRequest2.setTag(TAG);
 
+        // Instantiate the RequestQueue for FamilySize Params.
+        requestQueue = Volley.newRequestQueue(FloaterActivity.this);
+
+        // Request a JSON response from the provided URL.
+        jsonArrayRequest3 = new JsonArrayRequest
+                (Request.Method.GET, Url.BASE_URL + Url.CATEGORY_LIST, null, new Response.Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d("ResponseArray[Category]", response.toString());
+                        REQUEST_FLAG += 1;
+                        //validateViews(true);
+                        parseJsonResult(response, 3);
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+
+        // Set the tag on the request.
+        jsonArrayRequest3.setTag(TAG);
+
         jsonArrayRequest1.setRetryPolicy(new DefaultRetryPolicy(
                 3000,
                 3,
@@ -216,9 +244,15 @@ public class FloaterActivity extends AppCompatActivity {
                 3,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
+        jsonArrayRequest3.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                3,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         // Add the request to the RequestQueue.
         requestQueue.add(jsonArrayRequest1);
         requestQueue.add(jsonArrayRequest2);
+        requestQueue.add(jsonArrayRequest3);
 
     }
 
@@ -239,8 +273,14 @@ public class FloaterActivity extends AppCompatActivity {
                     familySizeId[i] = json.getString("_id");
                     familyAdultSize[i] = json.getInt("adult");
                     familyChildSize[i] = json.getInt("child");
+                } else if (flag == 3) {
+                    //Adding the _id, category_id, category_name, parent_category_id into array
+                    if (json.getString("category_name").equals("Floater")) {
+                        categoryId = json.getString("_id");
+                        categoryName = json.getString("category_name");
+                    }
                 }
-                if (REQUEST_FLAG > 1) {
+                if (REQUEST_FLAG > 2) {
                     validateViews(true);
                     setupSpinner();
                 }

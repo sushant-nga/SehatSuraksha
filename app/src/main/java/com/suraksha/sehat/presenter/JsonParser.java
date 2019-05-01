@@ -77,7 +77,7 @@ public class JsonParser {
                 int premiumAmount = currentPlan.getInt("premium_amount");
 
                 // Extract the categoryId for the key called "category_id"
-                int categoryId = currentPlan.getInt("category_id");
+                String categoryId = currentPlan.getString("category_id");
 
                 // Extract the JSONArray associated with the key called "family_size",
                 // which represents family size info (or plans).

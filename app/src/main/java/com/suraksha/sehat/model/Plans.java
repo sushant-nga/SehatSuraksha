@@ -27,7 +27,7 @@ public class Plans {
     private int mPremiumAmount;
 
     /** CategoryId of the plan */
-    private double mCategoryId;
+    private String mCategoryId;
 
     /** FamilySize of the plan */
     private String mFamilySize;
@@ -48,7 +48,7 @@ public class Plans {
      * Constructs a new {@link Plans} object.
      */
     public Plans(String planId, String familySizeId, String sumInsuredId, String companyId, String planName,
-                 double lowerAgeGroup, int upperAgeGroup, int premiumAmount, int categoryId, String familySize,
+                 double lowerAgeGroup, int upperAgeGroup, int premiumAmount, String categoryId, String familySize,
                  int adult, int child, int amount, String companyName) {
         mPlanId = planId;
         mFamilySizeId = familySizeId;

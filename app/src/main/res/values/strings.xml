@@ -12,6 +12,12 @@
     <string name="category_text">Category</string>
     <string name="sum_insured_text">Sum Insured</string>
 
+    <!-- Category Options -->
+    <string name="category_diabetic_care">Diabetic Care</string>
+    <string name="category_cancer_care">Cancer Care</string>
+    <string name="category_cardiac_care">Cardiac Care</string>
+    <string name="category_senior_citizen">Senior Citizen</string>
+
     <!-- Age Unit Options -->
     <string name="age_days">Days</string>
     <string name="age_years">Years</string>

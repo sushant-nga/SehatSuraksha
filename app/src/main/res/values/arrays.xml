@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- These are options displayed in the category group drop-down Spinner -->
+    <string-array name="category_options">
+        <item>@string/category_diabetic_care</item>
+        <item>@string/category_cancer_care</item>
+        <item>@string/category_cardiac_care</item>
+        <item>@string/category_senior_citizen</item>
+    </string-array>
+
     <!-- These are options displayed in the family group drop-down Spinner -->
     <string-array name="age_unit_options">
         <item>@string/age_years</item>
