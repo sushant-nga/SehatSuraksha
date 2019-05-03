@@ -145,14 +145,25 @@ public class FloaterActivity extends AppCompatActivity {
         proceedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(FloaterActivity.this,PlansActivity.class);
-                intent.putExtra("mSizeId", mSizeId);
-                intent.putExtra("mSumId",mSumId);
-                intent.putExtra("age", ageText);
-                intent.putExtra("categoryId", categoryId);
-                intent.putExtra("fromActivity", "Floater");
-                Log.d("SpecialActivity(age)", ageText);
-                startActivity(intent);
+                if (TextUtils.isEmpty(mAgeGroup.getText())) {
+                    Toast.makeText(FloaterActivity.this, getString(R.string.age_is_empty), Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(FloaterActivity.this, PlansActivity.class);
+                    intent.putExtra("mSizeId", mSizeId);
+                    intent.putExtra("mSumId", mSumId);
+                    if (mAgeUnit.getSelectedItem().equals("Years")) {
+                        intent.putExtra("age", ageText);
+                    } else if (mAgeUnit.getSelectedItem().equals("Days")) {
+                        double ageInDays = (Double.parseDouble(ageText))/(double)365;
+                        ageInDays = Math.round(ageInDays * 100.0) / 100.0;
+                        intent.putExtra("age", String.valueOf(ageInDays));
+                    }
+                    intent.putExtra("categoryId", categoryId);
+                    intent.putExtra("deductible", 0);
+                    intent.putExtra("fromActivity", "Floater");
+                    Log.d("FloaterActivity(age)", ageText);
+                    startActivity(intent);
+                }
             }
         });
 

@@ -27,6 +27,7 @@ public class PlansAdapter extends ArrayAdapter<Plans> {
     private static final int GST_TAX_RATE = 18;
 
     Context mContext;
+    int mFlag;
 
     /**
      * Constructs a new {@link PlansAdapter}.
@@ -34,9 +35,10 @@ public class PlansAdapter extends ArrayAdapter<Plans> {
      * @param context of the app
      * @param plans is the list of plans, which is the data source of the adapter
      */
-    public PlansAdapter(Context context, List<Plans> plans) {
+    public PlansAdapter(Context context, List<Plans> plans, int flag) {
         super(context, 0, plans);
         mContext = context;
+        mFlag = flag;
     }
 
     /**
@@ -65,15 +67,18 @@ public class PlansAdapter extends ArrayAdapter<Plans> {
         TextView premiumAmount = (TextView) listItemView.findViewById(R.id.premium_amount);
 
         // Set the values to their respective views
-        companyName.setText(currentPlan.getCompanyName());
+        companyName.setText(currentPlan.getCompanyName() + " (" + currentPlan.getPlanType() + ")");
         sumInsured.setText(String.valueOf(currentPlan.getSumInsured()) + " /-");
         adultCount.setText(String.valueOf(currentPlan.getAdultCount()) + " Adult");
         childCount.setText(String.valueOf(currentPlan.getChildCount()) + " Child");
         ageGroup.setText(String.valueOf(currentPlan.getLowerAgeGroup()) + " - " + String.valueOf(currentPlan.getUpperAgeGroup()) + " Years");
 
-        int mPremiumAmount = currentPlan.getPremiumAmount() + ((GST_TAX_RATE * currentPlan.getPremiumAmount())/100);
-
-        premiumAmount.setText(String.valueOf(mPremiumAmount) + " /-");
+        if (mFlag == 2) {
+            premiumAmount.setText(String.valueOf(currentPlan.getPremiumAmount()) + " /-");
+        } else {
+            int mPremiumAmount = currentPlan.getPremiumAmount() + ((GST_TAX_RATE * currentPlan.getPremiumAmount()) / 100);
+            premiumAmount.setText(String.valueOf(mPremiumAmount) + " /-");
+        }
 
         // Return the list item view that is now showing the appropriate data
         return listItemView;

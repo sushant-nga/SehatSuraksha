@@ -15,6 +15,13 @@
         <item>@string/age_days</item>
     </string-array>
 
+    <!-- These are options displayed in the deductible drop-down Spinner -->
+    <string-array name="deductible_options">
+        <item>@string/deduct_3</item>
+        <item>@string/deduct_5</item>
+        <item>@string/deduct_10</item>
+    </string-array>
+
     <!-- These are options displayed in the age group drop-down Spinner -->
     <string-array name="age_group_options">
         <item>@string/age_20</item>

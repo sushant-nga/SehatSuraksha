@@ -62,10 +62,8 @@ public class SpecialActivity extends AppCompatActivity {
     private int familyAdultSize [] = new int [10];
     private int familyChildSize [] = new int [10];
 
-    private String categoryId [];
-    private String categoryName [];
-    private String mCategoryId;
-    private String mCategoryName;
+    private String categoryId [] = new String [6];
+    private String categoryName [] = new String [6];
 
     String ageText;
 
@@ -78,6 +76,13 @@ public class SpecialActivity extends AppCompatActivity {
 //     * Age Group of the user. The possible valid values are in the InsuranceContract.java file.
 //     */
 //    private int mAge = 17;
+
+    /**
+     * Category. The possible valid values are in the InsuranceContract.java file.
+     */
+    private String mCategoryText = "Diabetic Care";
+    private String mCategoryId = "";
+    private String mCategoryName;
 
     /**
      * Family Size. The possible valid values are in the InsuranceContract.java file.
@@ -147,14 +152,25 @@ public class SpecialActivity extends AppCompatActivity {
         proceedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(SpecialActivity.this, PlansActivity.class);
-                intent.putExtra("mSizeId", familySizeId[0]);
-                intent.putExtra("mSumId",mSumId);
-                intent.putExtra("age", ageText);
-                intent.putExtra("categoryId", categoryId);
-                intent.putExtra("fromActivity", "Special");
-                Log.d("SpecialActivity(age)", ageText);
-                startActivity(intent);
+                if (TextUtils.isEmpty(mAgeGroup.getText())) {
+                    Toast.makeText(SpecialActivity.this, getString(R.string.age_is_empty), Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(SpecialActivity.this, PlansActivity.class);
+                    intent.putExtra("mSizeId", familySizeId[0]);
+                    intent.putExtra("mSumId", mSumId);
+                    if (mAgeUnit.getSelectedItem().equals("Years")) {
+                        intent.putExtra("age", ageText);
+                    } else if (mAgeUnit.getSelectedItem().equals("Days")) {
+                        double ageInDays = (Double.parseDouble(ageText))/(double)365;
+                        ageInDays = Math.round(ageInDays * 100.0) / 100.0;
+                        intent.putExtra("age", String.valueOf(ageInDays));
+                    }
+                    intent.putExtra("categoryId", mCategoryId);
+                    intent.putExtra("deductible", 0);
+                    intent.putExtra("fromActivity", "Special");
+                    Log.d("SpecialActivity(age)", ageText);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -263,8 +279,6 @@ public class SpecialActivity extends AppCompatActivity {
         //Traversing through all the items in the json array and storing it into local array
         for(int i = 0 ; i < response.length() ; i++) {
 
-            categoryId = new String[response.length()];
-            categoryName = new String[response.length()];
             try {
                 //Getting JSON Object
                 JSONObject json = response.getJSONObject(i);
@@ -279,11 +293,9 @@ public class SpecialActivity extends AppCompatActivity {
                     familyAdultSize[i] = json.getInt("adult");
                     familyChildSize[i] = json.getInt("child");
                 } else if (flag == 3) {
-                    //Adding the _id, category_id, category_name, parent_category_id into array
-                    if (json.getString("category_name").contains("Special")) {
+                    //Adding the _id, category_id, category_name into array
                         categoryId[i] = json.getString("_id");
                         categoryName[i] = json.getString("category_name");
-                    }
                 }
                 if (REQUEST_FLAG > 2) {
                     validateViews(true);
@@ -323,19 +335,14 @@ public class SpecialActivity extends AppCompatActivity {
                 String selection = (String) parent.getItemAtPosition(position);
                 if (!TextUtils.isEmpty(selection)) {
                     if (selection.equals("Diabetic Care")) {
-                        mUnit = 1;
                         mCategoryId = categoryId[2];
                     } else if (selection.equals("Cancer Care")) {
-                        mUnit = 2;
                         mCategoryId = categoryId[3];
                     } else if (selection.equals("Cardiac Care")) {
-                        mUnit = 3;
                         mCategoryId = categoryId[4];
                     } else if (selection.equals("Senior Citizen")) {
-                        mUnit = 4;
                         mCategoryId = categoryId[5];
                     }  else {
-                        mUnit = 1;
                         mCategoryId = categoryId[2];
                     }
                 }

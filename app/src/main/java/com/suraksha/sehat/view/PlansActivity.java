@@ -30,6 +30,7 @@ import java.util.Map;
 
 public class PlansActivity extends AppCompatActivity {
     String sizeId, sumId, age, categoryId, fromActivity;
+    int deductibleAmount;
 
     View loadingIndicator;
 
@@ -52,6 +53,13 @@ public class PlansActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plans);
 
+        sizeId = getIntent().getStringExtra("mSizeId");
+        sumId = getIntent().getStringExtra("mSumId");
+        age = getIntent().getStringExtra("age");
+        categoryId = getIntent().getStringExtra("categoryId");
+        deductibleAmount = getIntent().getIntExtra("deductible", 0);
+        fromActivity = getIntent().getStringExtra("fromActivity");
+
         loadingIndicator = findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.VISIBLE);
 
@@ -61,18 +69,18 @@ public class PlansActivity extends AppCompatActivity {
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
         plansListView.setEmptyView(mEmptyStateTextView);
 
-        // Create a new adapter that takes an empty list of plans as input
-        mAdapter = new PlansAdapter(this, new ArrayList<Plans>());
+        if (fromActivity.equals("Topups")) {
+            // Create a new adapter that takes an empty list of plans as input
+            mAdapter = new PlansAdapter(this, new ArrayList<Plans>(), 2);
+        } else {
+            // Create a new adapter that takes an empty list of plans as input
+            mAdapter = new PlansAdapter(this, new ArrayList<Plans>(), 1);
+        }
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
         plansListView.setAdapter(mAdapter);
 
-        sizeId = getIntent().getStringExtra("mSizeId");
-        sumId = getIntent().getStringExtra("mSumId");
-        age = getIntent().getStringExtra("age");
-        categoryId = getIntent().getStringExtra("categoryId");
-        fromActivity = getIntent().getStringExtra("fromActivity");
         Log.d("PlansActivity(mSizeId)", sizeId);
         Log.d("PlansActivity(mSumId)", sumId);
         Log.d("PlansActivity(age)", age);
@@ -131,6 +139,7 @@ public class PlansActivity extends AppCompatActivity {
                     params.put("sum_insured_id", sumId);
                     params.put("age", age);
                     params.put("category_id", categoryId);
+                    params.put("deductible", String.valueOf(deductibleAmount));
 
                     return params;
                 }

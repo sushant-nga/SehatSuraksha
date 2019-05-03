@@ -29,6 +29,9 @@ public class Plans {
     /** CategoryId of the plan */
     private String mCategoryId;
 
+    /** PlanType of the plan */
+    private String mPlanType;
+
     /** FamilySize of the plan */
     private String mFamilySize;
 
@@ -48,7 +51,7 @@ public class Plans {
      * Constructs a new {@link Plans} object.
      */
     public Plans(String planId, String familySizeId, String sumInsuredId, String companyId, String planName,
-                 double lowerAgeGroup, int upperAgeGroup, int premiumAmount, String categoryId, String familySize,
+                 double lowerAgeGroup, int upperAgeGroup, int premiumAmount, String categoryId, String planType, String familySize,
                  int adult, int child, int amount, String companyName) {
         mPlanId = planId;
         mFamilySizeId = familySizeId;
@@ -59,6 +62,7 @@ public class Plans {
         mUpperAgeGroup = upperAgeGroup;
         mPremiumAmount = premiumAmount;
         mCategoryId = categoryId;
+        mPlanType = planType;
         mFamilySize = familySize;
         mAdult = adult;
         mChild = child;
@@ -106,6 +110,13 @@ public class Plans {
      */
     public String getCompanyName() {
         return mCompanyName;
+    }
+
+    /**
+     * Returns the planType of the plan.
+     */
+    public String getPlanType() {
+        return mPlanType;
     }
 
     /**

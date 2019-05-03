@@ -11,6 +11,7 @@
     <string name="family_size_text">Family Size</string>
     <string name="category_text">Category</string>
     <string name="sum_insured_text">Sum Insured</string>
+    <string name="deductable_text">Deductable</string>
 
     <!-- Category Options -->
     <string name="category_diabetic_care">Diabetic Care</string>
@@ -21,6 +22,11 @@
     <!-- Age Unit Options -->
     <string name="age_days">Days</string>
     <string name="age_years">Years</string>
+
+    <!-- Deductibles Options -->
+    <string name="deduct_3">3,00,000</string>
+    <string name="deduct_5">5,00,000</string>
+    <string name="deduct_10">10,00,000</string>
 
     <!-- Age Group Options -->
     <string name="age_20">0.3 – 20 Years</string>
@@ -76,5 +82,8 @@
 
     <!-- Text to display in the list when there are no plans [CHAR LIMIT=NONE] -->
     <string name="no_plans">No plans found.</string>
+
+    <!-- Text to display in the toast msg if age is empty [CHAR LIMIT=NONE] -->
+    <string name="age_is_empty">Please enter the age</string>
 
 </resources>

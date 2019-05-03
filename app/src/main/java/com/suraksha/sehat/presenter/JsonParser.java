@@ -79,6 +79,9 @@ public class JsonParser {
                 // Extract the categoryId for the key called "category_id"
                 String categoryId = currentPlan.getString("category_id");
 
+                // Extract the categoryId for the key called "plan_type"
+                String planType = currentPlan.getString("plan_type");
+
                 // Extract the JSONArray associated with the key called "family_size",
                 // which represents family size info (or plans).
                 JSONArray familySizeArray = currentPlan.getJSONArray("family_size");
@@ -118,7 +121,7 @@ public class JsonParser {
                 // Create a new {@link Plan} object with the parameters
                 // and url from the JSON response.
                 Plans plan = new Plans(planId, familySizeId, sumInsuredId, companyId, planName,
-                        lowerAgeGroup, upperAgeGroup, premiumAmount, categoryId, familySize,
+                        lowerAgeGroup, upperAgeGroup, premiumAmount, categoryId, planType, familySize,
                         adult, child, amount, companyName);
 
                 // Add the new {@link Plan} to the list of plans.
